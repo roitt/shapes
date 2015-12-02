@@ -4,66 +4,20 @@
     tools:context=".FullscreenActivity"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/questionZone"
+    <fragment
+        class="com.rohitbhoompally.shapes.fragments.QuestionFragment"
+        android:id="@+id/question_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.9"
-        android:background="@color/colorPrimary">
+        tools:layout="@layout/fragment_question" />
 
-    </FrameLayout>
-
-    <!--Table layout for showing exactly 4 answer choices-->
-    <TableLayout
+    <fragment
+        class="com.rohitbhoompally.shapes.fragments.AnswerFragment"
+        android:id="@+id/answer_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1">
-
-        <!--First row-->
-        <TableRow
-            android:id="@+id/rowOne"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <!--Spans two columns for two choices-->
-            <Button
-                android:id="@+id/A"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="A"/>
-
-            <Button
-                android:id="@+id/B"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="B"/>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/rowTwo"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <!--Spans two columns for two choices-->
-            <Button
-                android:id="@+id/C"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="C"/>
-
-            <Button
-                android:id="@+id/D"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="D"/>
-
-        </TableRow>
-    </TableLayout>
+        android:layout_weight="0.1"
+        tools:layout="@layout/fragment_answer" />
 
 </LinearLayout>
