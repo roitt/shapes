@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#0099cc"
+    tools:context=".FullscreenActivity"
+    android:orientation="horizontal">
+
+    <fragment
+        class="com.rohitbhoompally.shapes.fragments.QuestionFragment"
+        android:id="@+id/question_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        tools:layout="@layout/fragment_question" />
+
+    <fragment
+        class="com.rohitbhoompally.shapes.fragments.AnswerFragment"
+        android:id="@+id/answer_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        tools:layout="@layout/fragment_answer" />
+
+</LinearLayout>
