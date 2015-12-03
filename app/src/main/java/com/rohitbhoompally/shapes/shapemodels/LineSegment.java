@@ -1,4 +1,4 @@
-package com.rohitbhoompally.shapes.shapes;
+package com.rohitbhoompally.shapes.shapemodels;
 
 import android.graphics.Point;
 
@@ -7,7 +7,7 @@ import android.graphics.Point;
  *
  * A line segment has a starting point and and ending point, and a line connecting those points.
  */
-public class LineSegment {
+public class LineSegment extends Shape {
     private Point startingPoint;
     private Point endingPoint;
 

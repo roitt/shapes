@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Shapes</string>
 
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="how_many_items_do_you_see">How many %s do you see?</string>
+
+    <string name="line_segments">Line Segments</string>
 </resources>
