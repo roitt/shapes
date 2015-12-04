@@ -1,5 +1,6 @@
 package com.rohitbhoompally.shapes.algorithmics;
 
+import com.rohitbhoompally.shapes.shapemodels.LineSegment;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
 
 import java.util.ArrayList;
@@ -16,9 +17,22 @@ import java.util.Map;
  */
 public class ShapeListGenerator {
 
+    private static final int LOWER_BOUND = 0;
+    private static final int UPPER_BOUND = 20;
+
     public ArrayList<Shape> getOverlappingShapes(int difficulty, QAGenerator.ShapeType shapeType) {
         ArrayList<Shape> overlappingShapes = null;
 
+        switch (shapeType) {
+            case LineSegment:
+                overlappingShapes = getOverlappingLinesSegments(difficulty);
+                break;
+        }
+
         return  overlappingShapes;
+    }
+
+    private ArrayList<Shape> getOverlappingLinesSegments(int difficulty) {
+
     }
 }

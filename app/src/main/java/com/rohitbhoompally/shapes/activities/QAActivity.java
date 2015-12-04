@@ -51,6 +51,11 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
 
     private void serveUpNextQA() {
         ShapeQAItem nextItem = qaGenerator.getNextQA(1);
+
+        // Pass the question string to question fragment
         getQuestionFragment().setQuestion(nextItem.getShapeType());
+
+        // Pass the shape list to shapes fragment
+        getShapesFragment().drawShapes(nextItem.getOverlappingShapes());
     }
 }
