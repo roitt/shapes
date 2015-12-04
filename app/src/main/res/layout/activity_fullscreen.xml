@@ -5,19 +5,19 @@
     android:orientation="vertical">
 
     <fragment
+        class="com.rohitbhoompally.shapes.fragments.ShapesFragment"
+        android:id="@+id/shapes_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        tools:layout="@layout/fragment_shapes" />
+
+    <fragment
         class="com.rohitbhoompally.shapes.fragments.QuestionFragment"
         android:id="@+id/question_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        tools:layout="@layout/fragment_question" />
-
-    <fragment
-        class="com.rohitbhoompally.shapes.fragments.AnswerFragment"
-        android:id="@+id/answer_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        tools:layout="@layout/fragment_answer" />
+        tools:layout="@layout/fragment_question" />
 
 </LinearLayout>

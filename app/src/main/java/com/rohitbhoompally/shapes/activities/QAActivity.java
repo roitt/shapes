@@ -6,11 +6,30 @@ import android.os.Bundle;
 import com.rohitbhoompally.shapes.R;
 import com.rohitbhoompally.shapes.algorithmics.QAGenerator;
 import com.rohitbhoompally.shapes.fragments.QuestionFragment;
+import com.rohitbhoompally.shapes.fragments.ShapesFragment;
 import com.rohitbhoompally.shapes.interfaces.AnswerListener;
 import com.rohitbhoompally.shapes.shapemodels.ShapeQAItem;
 
 public class QAActivity extends AppCompatActivity implements AnswerListener {
     private QAGenerator qaGenerator;
+    private QuestionFragment questionFragment;
+    private ShapesFragment shapesFragment;
+
+    private QuestionFragment getQuestionFragment() {
+        if (questionFragment == null) {
+            questionFragment = (QuestionFragment)
+                    getSupportFragmentManager().findFragmentById(R.id.question_fragment);
+        }
+        return questionFragment;
+    }
+
+    private ShapesFragment getShapesFragment() {
+        if (shapesFragment == null) {
+            shapesFragment = (ShapesFragment)
+                    getSupportFragmentManager().findFragmentById(R.id.shapes_fragment);
+        }
+        return shapesFragment;
+    }
 
     public QAActivity() {
         qaGenerator = new QAGenerator();
@@ -27,13 +46,11 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
 
     @Override
     public void onOptionSelected(Choice selection) {
-        QuestionFragment fragment = (QuestionFragment)
-                getSupportFragmentManager().findFragmentById(R.id.question_fragment);
-        fragment.onOptionSelected(selection);
+        getShapesFragment().onOptionSelected(selection);
     }
 
     private void serveUpNextQA() {
         ShapeQAItem nextItem = qaGenerator.getNextQA(1);
-
+        getQuestionFragment().setQuestion(nextItem.getShapeType());
     }
 }
