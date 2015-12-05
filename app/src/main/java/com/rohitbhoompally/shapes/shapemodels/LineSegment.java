@@ -1,6 +1,6 @@
 package com.rohitbhoompally.shapes.shapemodels;
 
-import android.graphics.Point;
+import android.graphics.PointF;
 
 /**
  * Created by rbhoompally on 12/1/15.
@@ -8,19 +8,19 @@ import android.graphics.Point;
  * A line segment has a starting point and and ending point, and a line connecting those points.
  */
 public class LineSegment extends Shape {
-    private Point startingPoint;
-    private Point endingPoint;
+    private PointF startingPoint;
+    private PointF endingPoint;
 
-    public LineSegment(Point startingPoint, Point endingPoint) {
+    public LineSegment(PointF startingPoint, PointF endingPoint) {
         this.startingPoint = startingPoint;
         this.endingPoint = endingPoint;
     }
 
-    public Point getStartingPoint() {
+    public PointF getStartingPoint() {
         return startingPoint;
     }
 
-    public Point getEndingPoint() {
+    public PointF getEndingPoint() {
         return endingPoint;
     }
 }

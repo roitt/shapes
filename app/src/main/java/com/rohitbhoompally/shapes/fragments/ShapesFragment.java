@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.rohitbhoompally.shapes.R;
 import com.rohitbhoompally.shapes.interfaces.AnswerListener;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
+import com.rohitbhoompally.shapes.views.DrawingView;
 
 import java.util.ArrayList;
 
@@ -19,10 +20,14 @@ import java.util.ArrayList;
  */
 public class ShapesFragment extends Fragment {
 
+    private DrawingView drawingView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shapes, null);
+        View rootView = inflater.inflate(R.layout.fragment_shapes, null);
+        drawingView = (DrawingView) rootView.findViewById(R.id.drawing_canvas);
+        return rootView;
     }
 
     public void onOptionSelected(AnswerListener.Choice selection) {
@@ -30,6 +35,6 @@ public class ShapesFragment extends Fragment {
     }
 
     public void drawShapes(ArrayList<Shape> shapeList) {
-        // TODO: Draw shapes on a canvas.
+        drawingView.drawShapesOnCanvas(shapeList);
     }
 }

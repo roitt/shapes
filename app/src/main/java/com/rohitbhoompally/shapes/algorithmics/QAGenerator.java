@@ -1,8 +1,7 @@
 package com.rohitbhoompally.shapes.algorithmics;
 
-import android.content.res.Resources;
+import android.content.Context;
 
-import com.rohitbhoompally.shapes.ShapesApplication;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
 import com.rohitbhoompally.shapes.shapemodels.ShapeQAItem;
 
@@ -21,13 +20,30 @@ public class QAGenerator {
     private static final int TOTAL_SHAPES = POSSIBLE_SHAPES.size();
     private static final Random RANDOMIZER = new Random();
 
-    private Resources resources;
+    private Context context;
+
+    public QAGenerator(Context context) {
+        this.context = context;
+    }
 
     /**
      * Have all possible shapes ever here
      */
     public enum ShapeType {
         LineSegment,
+    }
+
+    /**
+     * Let us follow a factory pattern, as we would always need an instance of this class
+     * to serve up shape maps
+     * @return
+     */
+    private ShapeListGenerator shapeListGenerator;
+    public ShapeListGenerator getShapeListGenerator(Context context) {
+        if (shapeListGenerator == null) {
+            shapeListGenerator = new ShapeListGenerator(context);
+        }
+        return shapeListGenerator;
     }
 
     /**
@@ -44,7 +60,7 @@ public class QAGenerator {
         ShapeType currentShapeType = getRandomShapeType(difficulty);
 
         /* Get the list of overlapping shapes */
-        ShapeListGenerator shapeListGenerator = ShapesApplication.getShapeListGenerator();
+        ShapeListGenerator shapeListGenerator = getShapeListGenerator(context);
         ArrayList<Shape> shapeList = shapeListGenerator.getOverlappingShapes(difficulty, currentShapeType);
 
         /* Calculate the answer for the overlapping shapes */
