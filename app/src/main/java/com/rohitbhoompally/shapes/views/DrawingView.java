@@ -2,10 +2,11 @@ package com.rohitbhoompally.shapes.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
+import com.rohitbhoompally.shapes.R;
 import com.rohitbhoompally.shapes.shapemodels.LineSegment;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
 
@@ -15,8 +16,8 @@ import java.util.ArrayList;
  * Created by rbhoompally on 12/4/15.
  */
 public class DrawingView extends SquareView {
-    private static final int DEFAULT_COLOR = Color.WHITE;
-    private static final float DEFAULT_STROKE_WIDTH = 7.5f;
+    private static final int DEFAULT_COLOR_RES = R.color.white_60;
+    private static final float DEFAULT_STROKE_WIDTH = 12.5f;
 
     private Paint paint;
 
@@ -39,7 +40,7 @@ public class DrawingView extends SquareView {
 
     private void init() {
         paint = new Paint();
-        paint.setColor(DEFAULT_COLOR);
+        paint.setColor(ContextCompat.getColor(getContext(), DEFAULT_COLOR_RES));
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(DEFAULT_STROKE_WIDTH);
         paint.setAntiAlias(true);
