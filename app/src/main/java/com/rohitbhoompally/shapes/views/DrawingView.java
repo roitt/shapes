@@ -3,7 +3,6 @@ package com.rohitbhoompally.shapes.views;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
@@ -18,9 +17,13 @@ import java.util.ArrayList;
  */
 public class DrawingView extends SquareView {
     private static final int DEFAULT_COLOR_RES = R.color.white_60;
+    private static final int DEFAULT_CIRCLE_RES = R.color.blue_60;
+
     private static final float DEFAULT_STROKE_WIDTH = 12.5f;
+    private static final float DEFAULT_CIRCLE_RADIUS = 14f;
 
     private Paint paint;
+    private Paint circlePaint;
 
     private ArrayList<Shape> shapes;
 
@@ -45,6 +48,11 @@ public class DrawingView extends SquareView {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(DEFAULT_STROKE_WIDTH);
         paint.setAntiAlias(true);
+
+        circlePaint = new Paint();
+        circlePaint.setColor(ContextCompat.getColor(getContext(), DEFAULT_CIRCLE_RES));
+        circlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        circlePaint.setAntiAlias(true);
     }
 
     public void drawShapesOnCanvas(ArrayList<Shape> shapes) {
@@ -63,6 +71,8 @@ public class DrawingView extends SquareView {
             }
         }
 
+        // Draw intersection points
+        canvas.drawCircle(50f, 50f, DEFAULT_CIRCLE_RADIUS, circlePaint);
     }
 
     private void drawLineSegment(Canvas canvas, LineSegment lineSegment) {

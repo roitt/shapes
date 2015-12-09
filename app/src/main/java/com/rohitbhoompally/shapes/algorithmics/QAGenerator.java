@@ -36,7 +36,7 @@ public class QAGenerator {
     }
 
     /**
-     * Let us follow a factory pattern, as we would always need an instance of this class
+     * Let us follow a singleton pattern, as we would always need only one instance of this class
      * to serve up shape maps
      * @return
      */
