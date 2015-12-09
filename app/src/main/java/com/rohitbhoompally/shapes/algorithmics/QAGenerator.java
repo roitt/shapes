@@ -1,6 +1,7 @@
 package com.rohitbhoompally.shapes.algorithmics;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.rohitbhoompally.shapes.shapemodels.LineSegment;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
@@ -17,6 +18,8 @@ import java.util.Random;
  * Created by rbhoompally on 12/2/15.
  */
 public class QAGenerator {
+    private static final String TAG = QAGenerator.class.getSimpleName();
+
     private static final List<ShapeType> POSSIBLE_SHAPES =
             Collections.unmodifiableList(Arrays.asList(ShapeType.values()));
     private static final int TOTAL_SHAPES = POSSIBLE_SHAPES.size();
@@ -186,7 +189,7 @@ public class QAGenerator {
             l2 = l2+1;
 
 
-        System.out.println(2 + l1 + l2);
+        Log.d(TAG, Integer.toString(2 + l1 + l2));
 
         return answer;
     }
