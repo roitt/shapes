@@ -163,6 +163,21 @@ public class QAGenerator {
 
             if((xi == f2x1 && yi == f2y1) || (xi == f2x2 && yi == f2y2))
                 l2 = 0;
+                
+                
+            /* Check to see if the intersection point falls on the line
+             * if ( (Xa < MAX( MIN(X1,X2), MIN(X3,X4) )) ||
+             (Xa > MIN( MAX(X1,X2), MAX(X3,X4) )) )
+             return false; // intersection is out of bound
+             else
+             return true;
+             */
+            if(l1 != 0 && l2 != 0) {
+                if(xi < Math.max((Math.min(f1x1, f1x2)), Math.min(f2x1, f2x2)) ||
+                        xi > Math.min((Math.max(f1x1, f1x2)), Math.min(f2x1, f2x2))) {
+                    l1 = l2 = 0;
+                }
+            }
         }
 
         if(l1 != 0)
