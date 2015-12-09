@@ -120,11 +120,11 @@ public class QAGenerator {
         float f1x2 = f12.x;
         float f1y2 = f12.y;
         android.graphics.PointF f21 = sec.getStartingPoint();
-        float f2x1 = f11.x;
-        float f2y1 = f11.y;
+        float f2x1 = f21.x;
+        float f2y1 = f21.y;
         android.graphics.PointF f22 = sec.getEndingPoint();
-        float f2x2 = f12.x;
-        float f2y2 = f12.y;
+        float f2x2 = f22.x;
+        float f2y2 = f22.y;
 
         /*
           For getting the line equation:
@@ -177,7 +177,7 @@ public class QAGenerator {
              */
             if(l1 != 0 && l2 != 0) {
                 if(xi < Math.max((Math.min(f1x1, f1x2)), Math.min(f2x1, f2x2)) ||
-                        xi > Math.min((Math.max(f1x1, f1x2)), Math.min(f2x1, f2x2))) {
+                        xi > Math.min((Math.max(f1x1, f1x2)), Math.max(f2x1, f2x2))) {
                     l1 = l2 = 0;
                 }
             }
