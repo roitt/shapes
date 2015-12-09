@@ -2,7 +2,9 @@ package com.rohitbhoompally.shapes.algorithmics;
 
 import android.content.Context;
 
+import com.rohitbhoompally.shapes.shapemodels.LineSegment;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
+import com.rohitbhoompally.shapes.shapemodels.ShapeIntersectAnswer;
 import com.rohitbhoompally.shapes.shapemodels.ShapeQAItem;
 
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public class QAGenerator {
         ArrayList<Shape> shapeList = shapeListGenerator.getOverlappingShapes(difficulty, currentShapeType);
 
         /* Calculate the answer for the overlapping shapes */
-        int answer = getNumberOfOverlappingShapesInShapeList(currentShapeType, shapeList);
+        ShapeIntersectAnswer answer = getTotalShapesAndIntersections(currentShapeType, shapeList);
 
         return new ShapeQAItem(currentShapeType, answer, shapeList);
     }
@@ -86,7 +88,23 @@ public class QAGenerator {
      * @param shapes
      * @return
      */
-    private int getNumberOfOverlappingShapesInShapeList(ShapeType shapeType, ArrayList<Shape> shapes) {
-        return 1;
+    private ShapeIntersectAnswer getTotalShapesAndIntersections(ShapeType shapeType, ArrayList<Shape> shapes) {
+        switch (shapeType) {
+            case LineSegment:
+                return getTotalLinesSegmentsAndIntersections((ArrayList<LineSegment>) (ArrayList<?>) shapes);
+        }
+        return null;
+    }
+
+    /**
+     * The logic for finding out all intersecting points between all the line segments,
+     * and also the total number of line segments as an answer
+     * @param lineSegments
+     * @return
+     */
+    private ShapeIntersectAnswer getTotalLinesSegmentsAndIntersections(ArrayList<LineSegment> lineSegments) {
+        ShapeIntersectAnswer answer = null;
+
+        return answer;
     }
 }

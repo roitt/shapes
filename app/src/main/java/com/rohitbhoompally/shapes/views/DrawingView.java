@@ -3,6 +3,7 @@ package com.rohitbhoompally.shapes.views;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
@@ -55,11 +56,13 @@ public class DrawingView extends SquareView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // Draw the lines
         for (Shape shape : shapes) {
             if (shape instanceof LineSegment) {
                 drawLineSegment(canvas, (LineSegment) shape);
             }
         }
+
     }
 
     private void drawLineSegment(Canvas canvas, LineSegment lineSegment) {

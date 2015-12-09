@@ -9,10 +9,10 @@ import java.util.ArrayList;
  */
 public class ShapeQAItem {
     private QAGenerator.ShapeType shapeType;
-    private int answer;
+    private ShapeIntersectAnswer answer;
     private ArrayList<Shape> overlappingShapes;
 
-    public ShapeQAItem(QAGenerator.ShapeType shapeType, int answer, ArrayList<Shape> overlappingShapes) {
+    public ShapeQAItem(QAGenerator.ShapeType shapeType, ShapeIntersectAnswer answer, ArrayList<Shape> overlappingShapes) {
         this.shapeType = shapeType;
         this.answer = answer;
         this.overlappingShapes = overlappingShapes;
@@ -22,7 +22,7 @@ public class ShapeQAItem {
         return shapeType;
     }
 
-    public int getAnswer() {
+    public ShapeIntersectAnswer getAnswer() {
         return answer;
     }
 
