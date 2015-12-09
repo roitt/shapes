@@ -3,14 +3,17 @@ package com.rohitbhoompally.shapes.views;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
 import com.rohitbhoompally.shapes.R;
 import com.rohitbhoompally.shapes.shapemodels.LineSegment;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
+import com.rohitbhoompally.shapes.shapemodels.ShapeIntersectAnswer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rbhoompally on 12/4/15.
@@ -26,6 +29,7 @@ public class DrawingView extends SquareView {
     private Paint circlePaint;
 
     private ArrayList<Shape> shapes;
+    private ShapeIntersectAnswer answer;
 
     public DrawingView(Context context) {
         super(context);
@@ -55,8 +59,9 @@ public class DrawingView extends SquareView {
         circlePaint.setAntiAlias(true);
     }
 
-    public void drawShapesOnCanvas(ArrayList<Shape> shapes) {
+    public void drawShapesOnCanvas(ArrayList<Shape> shapes, ShapeIntersectAnswer answer) {
         this.shapes = shapes;
+        this.answer = answer;
         invalidate();
     }
 
@@ -72,7 +77,13 @@ public class DrawingView extends SquareView {
         }
 
         // Draw intersection points
-        canvas.drawCircle(50f, 50f, DEFAULT_CIRCLE_RADIUS, circlePaint);
+        if (answer != null) {
+            List<PointF> intersections = answer.getIntersectingPoints();
+
+            for (PointF pointF : intersections) {
+                canvas.drawCircle(pointF.x, pointF.y, DEFAULT_CIRCLE_RADIUS, circlePaint);
+            }
+        }
     }
 
     private void drawLineSegment(Canvas canvas, LineSegment lineSegment) {

@@ -1,5 +1,6 @@
 package com.rohitbhoompally.shapes.fragments;
 
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,11 @@ import android.widget.Toast;
 import com.rohitbhoompally.shapes.R;
 import com.rohitbhoompally.shapes.interfaces.AnswerListener;
 import com.rohitbhoompally.shapes.shapemodels.Shape;
+import com.rohitbhoompally.shapes.shapemodels.ShapeIntersectAnswer;
 import com.rohitbhoompally.shapes.views.DrawingView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rbhoompally on 12/2/15.
@@ -34,7 +37,7 @@ public class ShapesFragment extends Fragment {
         Toast.makeText(getActivity(), selection.name(), Toast.LENGTH_SHORT).show();
     }
 
-    public void drawShapes(ArrayList<Shape> shapeList) {
-        drawingView.drawShapesOnCanvas(shapeList);
+    public void drawShapes(ArrayList<Shape> shapeList, ShapeIntersectAnswer answer) {
+        drawingView.drawShapesOnCanvas(shapeList, answer);
     }
 }

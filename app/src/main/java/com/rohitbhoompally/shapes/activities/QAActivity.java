@@ -66,6 +66,6 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
         getQuestionFragment().setQuestion(nextItem.getShapeType());
 
         // Pass the shape list to shapes fragment
-        getShapesFragment().drawShapes(nextItem.getOverlappingShapes());
+        getShapesFragment().drawShapes(nextItem.getOverlappingShapes(), nextItem.getAnswer());
     }
 }

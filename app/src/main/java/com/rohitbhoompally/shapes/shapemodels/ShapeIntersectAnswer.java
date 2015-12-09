@@ -25,4 +25,12 @@ public class ShapeIntersectAnswer {
     public List<PointF> getIntersectingPoints() {
         return intersectingPoints;
     }
+
+    public void addAnswer(int answer) {
+        this.answer += answer;
+    }
+
+    public void appendIntersectingPoints(PointF intersectingPoint) {
+        this.intersectingPoints.add(intersectingPoint);
+    }
 }
