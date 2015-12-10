@@ -6,5 +6,5 @@ package com.rohitbhoompally.shapes.interfaces;
 public interface AnswerListener {
     enum Choice {A, B, C, D};
 
-    void onOptionSelected(Choice selection);
+    void onOptionSelected(Choice selection, int answer);
 }

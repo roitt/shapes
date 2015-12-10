@@ -118,7 +118,7 @@ public class QAGenerator {
                 if (finalAnswer == null) {
                     finalAnswer = answer;
                 } else {
-                    finalAnswer.addAnswer(answer.getAnswer());
+                    finalAnswer.addAnswer(answer.getIntersectAnswer());
                     finalAnswer.appendIntersectingPoints(answer.getIntersectingPoints().get(0));
                 }
             }
@@ -149,6 +149,8 @@ public class QAGenerator {
         float f2x2 = f22.x;
         float f2y2 = f22.y;
 
+        boolean isIntersecting = true;
+
         /*
           For getting the line equation:
           A1 = (Y1-Y2)/(X1-X2) // Pay attention to not dividing by zero
@@ -172,7 +174,8 @@ public class QAGenerator {
 
         // Checking for parallel lines
         if (a1 == a2) {
-            return null;
+            l1 = l2 = 0;
+            isIntersecting = false;
         }
 
         b1 = f1y1 - (a1 * f1x1);
@@ -208,7 +211,8 @@ public class QAGenerator {
             if (l1 != 0 && l2 != 0) {
                 if (xi < Math.max((Math.min(f1x1, f1x2)), Math.min(f2x1, f2x2)) ||
                         xi > Math.min((Math.max(f1x1, f1x2)), Math.max(f2x1, f2x2))) {
-                    return null;
+                    l1 = l2 = 0;
+                    isIntersecting = false;
                 }
             }
         }
@@ -225,6 +229,6 @@ public class QAGenerator {
         List<PointF> intersections = new ArrayList<>();
         intersections.add(new PointF(xi, yi));
 
-        return new ShapeIntersectAnswer(l1 + l2 + 2, intersections);
+        return new ShapeIntersectAnswer(l1 + l2 + 2, intersections, isIntersecting);
     }
 }

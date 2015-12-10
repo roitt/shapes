@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import com.rohitbhoompally.shapes.R;
 import com.rohitbhoompally.shapes.algorithmics.QAGenerator;
-import com.rohitbhoompally.shapes.algorithmics.ShapeListGenerator;
 import com.rohitbhoompally.shapes.fragments.QuestionFragment;
 import com.rohitbhoompally.shapes.fragments.ShapesFragment;
 import com.rohitbhoompally.shapes.interfaces.AnswerListener;
@@ -15,6 +14,8 @@ import com.rohitbhoompally.shapes.shapemodels.ShapeQAItem;
 public class QAActivity extends AppCompatActivity implements AnswerListener {
     private QuestionFragment questionFragment;
     private ShapesFragment shapesFragment;
+
+    private ShapeQAItem currentQuestion;
 
     private QAGenerator qaGenerator;
     public QAGenerator getQAGenerator(Context context) {
@@ -55,8 +56,8 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
     }
 
     @Override
-    public void onOptionSelected(Choice selection) {
-        getShapesFragment().onOptionSelected(selection);
+    public void onOptionSelected(Choice selection, int answer) {
+
     }
 
     private void serveUpNextQA() {
@@ -64,8 +65,11 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
 
         // Pass the question string to question fragment
         getQuestionFragment().setQuestion(nextItem.getShapeType());
+        getQuestionFragment().setOptions(nextItem.getAnswer().getIntersectAnswer());
 
         // Pass the shape list to shapes fragment
         getShapesFragment().drawShapes(nextItem.getOverlappingShapes(), nextItem.getAnswer());
+
+        currentQuestion = nextItem;
     }
 }

@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class DrawingView extends SquareView {
     private static final int DEFAULT_COLOR_RES = R.color.white_60;
-    private static final int DEFAULT_CIRCLE_RES = R.color.blue_60;
+    private static final int DEFAULT_CIRCLE_RES = R.color.blue_75;
 
     private static final float DEFAULT_STROKE_WIDTH = 12.5f;
     private static final float DEFAULT_CIRCLE_RADIUS = 14f;
@@ -51,11 +51,14 @@ public class DrawingView extends SquareView {
         paint.setColor(ContextCompat.getColor(getContext(), DEFAULT_COLOR_RES));
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(DEFAULT_STROKE_WIDTH);
+        paint.setDither(true);
+        paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setAntiAlias(true);
 
         circlePaint = new Paint();
         circlePaint.setColor(ContextCompat.getColor(getContext(), DEFAULT_CIRCLE_RES));
         circlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setDither(true);
         circlePaint.setAntiAlias(true);
     }
 
@@ -77,7 +80,7 @@ public class DrawingView extends SquareView {
         }
 
         // Draw intersection points
-        if (answer != null) {
+        if (answer != null && answer.isIntersecting()) {
             List<PointF> intersections = answer.getIntersectingPoints();
 
             for (PointF pointF : intersections) {

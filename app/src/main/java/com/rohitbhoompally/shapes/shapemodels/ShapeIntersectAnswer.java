@@ -10,27 +10,33 @@ import java.util.List;
  * and it also gives a list of all intersecting points
  */
 public class ShapeIntersectAnswer {
-    private int answer;
+    private int intersectAnswer;
+    private boolean isIntersecting;
     private List<PointF> intersectingPoints;
 
-    public ShapeIntersectAnswer(int answer, List<PointF> intersectingPoints) {
-        this.answer = answer;
+    public ShapeIntersectAnswer(int intersectAnswer, List<PointF> intersectingPoints, boolean isIntersecting) {
+        this.intersectAnswer = intersectAnswer;
         this .intersectingPoints = intersectingPoints;
+        this.isIntersecting = isIntersecting;
     }
 
-    public int getAnswer() {
-        return answer;
+    public int getIntersectAnswer() {
+        return intersectAnswer;
     }
 
     public List<PointF> getIntersectingPoints() {
         return intersectingPoints;
     }
 
-    public void addAnswer(int answer) {
-        this.answer += answer;
+    public void addAnswer(int intersectAnswer) {
+        this.intersectAnswer += intersectAnswer;
     }
 
     public void appendIntersectingPoints(PointF intersectingPoint) {
         this.intersectingPoints.add(intersectingPoint);
+    }
+
+    public boolean isIntersecting() {
+        return isIntersecting;
     }
 }
