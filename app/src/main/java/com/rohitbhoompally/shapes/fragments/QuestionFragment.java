@@ -74,13 +74,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int givenAnswer = 0;
         switch (v.getId()) {
             case R.id.A:
                 onAnswerChosen(AnswerListener.Choice.A, options.get(0));
-                givenAnswer = options.get(0);
-                answerListener.onOptionSelected(AnswerListener.Choice.A, givenAnswer);
-                verifyAnswer(givenAnswer);
                 break;
 
             case R.id.B:
