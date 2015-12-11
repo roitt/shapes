@@ -41,14 +41,6 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        /* Serve up a question if there is not already one on the screen */
-        serveUpNextQA();
-    }
-
-    @Override
     public void onOptionSelected(Choice selection, int answer) {
 
     }
@@ -56,16 +48,19 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
     @Override
     public void onQACompleted() {
         addOrReplaceFragments(ReplacementType.Replace);
-        //serveUpNextQA();
     }
 
     private void addOrReplaceFragments(ReplacementType type) {
         if (findViewById(R.id.questionContainer) != null &&
                 findViewById(R.id.shapesContainer) != null) {
 
+            // Get the next question
+            ShapeQAItem nextItem = getNextQA(1);
+
             // Instantiate the fragments
-            shapesFragment = new ShapesFragment();
-            questionFragment = new QuestionFragment();
+            shapesFragment = ShapesFragment.newInstance(nextItem);
+
+            questionFragment = QuestionFragment.newInstance(nextItem);
 
             // Add shapes fragment
             FragmentManager manager = getSupportFragmentManager();
@@ -89,14 +84,7 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
         }
     }
 
-    private void serveUpNextQA() {
-        ShapeQAItem nextItem = getQAGenerator(getApplicationContext()).getNextQA(1);
-
-        // Pass the question string to question fragment
-        questionFragment.setQuestion(nextItem.getShapeType());
-        questionFragment.setOptions(nextItem.getAnswer().getIntersectAnswer());
-
-        // Pass the shape list to shapes fragment
-        shapesFragment.drawShapes(nextItem.getOverlappingShapes(), nextItem.getAnswer());
+    private ShapeQAItem getNextQA(int difficulty) {
+        return getQAGenerator(getApplicationContext()).getNextQA(difficulty);
     }
 }

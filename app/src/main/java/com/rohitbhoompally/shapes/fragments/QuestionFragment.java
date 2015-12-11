@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.rohitbhoompally.shapes.R;
 import com.rohitbhoompally.shapes.algorithmics.QAGenerator;
 import com.rohitbhoompally.shapes.interfaces.AnswerListener;
+import com.rohitbhoompally.shapes.shapemodels.ShapeQAItem;
 import com.rohitbhoompally.shapes.utils.QAUtil;
 
 import java.util.ArrayList;
@@ -26,6 +27,9 @@ import java.util.Random;
  * Created by rbhoompally on 12/2/15.
  */
 public class QuestionFragment extends Fragment implements View.OnClickListener {
+
+    public static final String SHAPE_ARG = "questionfragment.shape";
+    public static final String ANSWER_ARG = "questionfragment.answer";
 
     private AnswerListener answerListener;
     private TextView questionView;
@@ -39,6 +43,17 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private Random randomizer = new Random();
     private List<Integer> options;
     private int answer;
+
+    public static QuestionFragment newInstance(ShapeQAItem nextItem) {
+        QuestionFragment fragment = new QuestionFragment();
+
+        Bundle questionArgs = new Bundle();
+        questionArgs.putString(SHAPE_ARG, nextItem.getShapeType().name());
+        questionArgs.putInt(ANSWER_ARG, nextItem.getAnswer().getIntersectAnswer());
+        fragment.setArguments(questionArgs);
+
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -56,6 +71,14 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
+    private int getCorrectAnswer() {
+        return getArguments().getInt(ANSWER_ARG);
+    }
+
+    private QAGenerator.ShapeType getCurrentShapeType() {
+        return QAGenerator.ShapeType.valueOf(getArguments().getString(SHAPE_ARG));
+    }
+
     private void setOnClickListeners(Button... buttons) {
         for (Button button : buttons) {
             button.setOnClickListener(this);
@@ -71,6 +94,14 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         } catch (ClassCastException e) {
             throw new ClassCastException("Parent activity must implement AnswerListener");
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setQuestion(getCurrentShapeType());
+        setOptions(getCorrectAnswer());
     }
 
     @Override

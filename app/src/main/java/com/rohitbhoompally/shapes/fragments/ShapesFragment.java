@@ -8,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rohitbhoompally.shapes.R;
-import com.rohitbhoompally.shapes.shapemodels.Shape;
-import com.rohitbhoompally.shapes.shapemodels.ShapeIntersectAnswer;
+import com.rohitbhoompally.shapes.shapemodels.ShapeQAItem;
 import com.rohitbhoompally.shapes.views.DrawingView;
-
-import java.util.ArrayList;
 
 /**
  * Created by rbhoompally on 12/2/15.
@@ -20,6 +17,13 @@ import java.util.ArrayList;
 public class ShapesFragment extends Fragment {
 
     private DrawingView drawingView;
+    private static ShapeQAItem currentQAItem;
+
+    public static ShapesFragment newInstance(ShapeQAItem nextItem) {
+        ShapesFragment fragment = new ShapesFragment();
+        currentQAItem = nextItem;
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -29,9 +33,13 @@ public class ShapesFragment extends Fragment {
         return rootView;
     }
 
-    public void drawShapes(ArrayList<Shape> shapeList, ShapeIntersectAnswer answer) {
-        if (drawingView != null) {
-            drawingView.drawShapesOnCanvas(shapeList, answer);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (drawingView != null && currentQAItem != null) {
+            drawingView.drawShapesOnCanvas(currentQAItem.getOverlappingShapes(),
+                    currentQAItem.getAnswer());
         }
     }
 }
