@@ -4,5 +4,6 @@
     <translate
         android:fromYDelta="-100%p"
         android:toYDelta="0"
-        android:duration="600" />
+        android:startOffset="200"
+        android:duration="500" />
 </set>

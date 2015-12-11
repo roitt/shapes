@@ -17,12 +17,10 @@ import com.rohitbhoompally.shapes.views.DrawingView;
 public class ShapesFragment extends Fragment {
 
     private DrawingView drawingView;
-    private static ShapeQAItem currentQAItem;
+    private  ShapeQAItem currentQAItem;
 
-    public static ShapesFragment newInstance(ShapeQAItem nextItem) {
-        ShapesFragment fragment = new ShapesFragment();
+    public void setNextQA(ShapeQAItem nextItem) {
         currentQAItem = nextItem;
-        return fragment;
     }
 
     @Nullable

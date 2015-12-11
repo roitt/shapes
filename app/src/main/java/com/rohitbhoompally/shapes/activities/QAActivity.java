@@ -58,7 +58,8 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
             ShapeQAItem nextItem = getNextQA(1);
 
             // Instantiate the fragments
-            shapesFragment = ShapesFragment.newInstance(nextItem);
+            shapesFragment = new ShapesFragment();
+            shapesFragment.setNextQA(nextItem);
 
             questionFragment = QuestionFragment.newInstance(nextItem);
 
@@ -68,8 +69,8 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
             FragmentTransaction questionTransaction = manager.beginTransaction();
 
             // Add transitions
-            shapesTransaction.setCustomAnimations(R.anim.in_from_top, 0);
-            questionTransaction.setCustomAnimations(R.anim.in_from_bottom, 0);
+            shapesTransaction.setCustomAnimations(R.anim.in_from_top, R.anim.out_from_top);
+            questionTransaction.setCustomAnimations(R.anim.in_from_bottom, R.anim.out_from_bottom);
 
             if (type == ReplacementType.Add) {
                 shapesTransaction.add(R.id.shapesContainer, shapesFragment);
