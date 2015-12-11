@@ -30,6 +30,8 @@ public class ShapesFragment extends Fragment {
     }
 
     public void drawShapes(ArrayList<Shape> shapeList, ShapeIntersectAnswer answer) {
-        drawingView.drawShapesOnCanvas(shapeList, answer);
+        if (drawingView != null) {
+            drawingView.drawShapesOnCanvas(shapeList, answer);
+        }
     }
 }

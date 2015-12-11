@@ -7,4 +7,5 @@ public interface AnswerListener {
     enum Choice {A, B, C, D};
 
     void onOptionSelected(Choice selection, int answer);
+    void onQACompleted();
 }

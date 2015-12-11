@@ -4,20 +4,20 @@
     tools:context=".FullscreenActivity"
     android:orientation="vertical">
 
-    <fragment
-        class="com.rohitbhoompally.shapes.fragments.ShapesFragment"
-        android:id="@+id/shapes_fragment"
+    <FrameLayout
+        android:id="@+id/shapesContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        tools:layout="@layout/fragment_shapes" />
+        android:layout_weight="0.9">
 
-    <fragment
-        class="com.rohitbhoompally.shapes.fragments.QuestionFragment"
-        android:id="@+id/question_fragment"
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/questionContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        tools:layout="@layout/fragment_question" />
+        android:layout_weight="0.1">
+
+    </FrameLayout>
 
 </LinearLayout>

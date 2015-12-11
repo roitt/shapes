@@ -1,6 +1,8 @@
 package com.rohitbhoompally.shapes.activities;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,8 +17,6 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
     private QuestionFragment questionFragment;
     private ShapesFragment shapesFragment;
 
-    private ShapeQAItem currentQuestion;
-
     private QAGenerator qaGenerator;
     public QAGenerator getQAGenerator(Context context) {
         if (qaGenerator == null) {
@@ -25,26 +25,19 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
         return qaGenerator;
     }
 
-    private QuestionFragment getQuestionFragment() {
-        if (questionFragment == null) {
-            questionFragment = (QuestionFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.question_fragment);
-        }
-        return questionFragment;
-    }
-
-    private ShapesFragment getShapesFragment() {
-        if (shapesFragment == null) {
-            shapesFragment = (ShapesFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.shapes_fragment);
-        }
-        return shapesFragment;
+    private enum ReplacementType {
+        Add, Replace,
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
+
+        // Initial setup, add the shapes and question fragment
+        if (savedInstanceState == null) {
+            addOrReplaceFragments(ReplacementType.Add);
+        }
     }
 
     @Override
@@ -60,16 +53,50 @@ public class QAActivity extends AppCompatActivity implements AnswerListener {
 
     }
 
+    @Override
+    public void onQACompleted() {
+        addOrReplaceFragments(ReplacementType.Replace);
+        //serveUpNextQA();
+    }
+
+    private void addOrReplaceFragments(ReplacementType type) {
+        if (findViewById(R.id.questionContainer) != null &&
+                findViewById(R.id.shapesContainer) != null) {
+
+            // Instantiate the fragments
+            shapesFragment = new ShapesFragment();
+            questionFragment = new QuestionFragment();
+
+            // Add shapes fragment
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction shapesTransaction = manager.beginTransaction();
+            FragmentTransaction questionTransaction = manager.beginTransaction();
+
+            // Add transitions
+            shapesTransaction.setCustomAnimations(R.anim.in_from_top, 0);
+            questionTransaction.setCustomAnimations(R.anim.in_from_bottom, 0);
+
+            if (type == ReplacementType.Add) {
+                shapesTransaction.add(R.id.shapesContainer, shapesFragment);
+                questionTransaction.add(R.id.questionContainer, questionFragment);
+            } else {
+                shapesTransaction.replace(R.id.shapesContainer, shapesFragment);
+                questionTransaction.replace(R.id.questionContainer, questionFragment);
+            }
+
+            shapesTransaction.commit();
+            questionTransaction.commit();
+        }
+    }
+
     private void serveUpNextQA() {
         ShapeQAItem nextItem = getQAGenerator(getApplicationContext()).getNextQA(1);
 
         // Pass the question string to question fragment
-        getQuestionFragment().setQuestion(nextItem.getShapeType());
-        getQuestionFragment().setOptions(nextItem.getAnswer().getIntersectAnswer());
+        questionFragment.setQuestion(nextItem.getShapeType());
+        questionFragment.setOptions(nextItem.getAnswer().getIntersectAnswer());
 
         // Pass the shape list to shapes fragment
-        getShapesFragment().drawShapes(nextItem.getOverlappingShapes(), nextItem.getAnswer());
-
-        currentQuestion = nextItem;
+        shapesFragment.drawShapes(nextItem.getOverlappingShapes(), nextItem.getAnswer());
     }
 }

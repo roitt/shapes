@@ -72,6 +72,10 @@ public class DrawingView extends SquareView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        if (shapes == null) {
+            return;
+        }
+
         // Draw the lines
         for (Shape shape : shapes) {
             if (shape instanceof LineSegment) {

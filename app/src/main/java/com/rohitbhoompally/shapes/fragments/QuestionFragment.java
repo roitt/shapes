@@ -1,5 +1,6 @@
 package com.rohitbhoompally.shapes.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -104,6 +105,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         } else {
             Toast.makeText(getContext(), "Wrong", Toast.LENGTH_SHORT).show();
         }
+
+        answerListener.onQACompleted();
     }
 
     public void setQuestion(QAGenerator.ShapeType shapeType) {
@@ -142,10 +145,12 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setValuesToButtons(List<Integer> options) {
-        A.setText(Integer.toString(options.get(0)));
-        B.setText(Integer.toString(options.get(1)));
-        C.setText(Integer.toString(options.get(2)));
-        D.setText(Integer.toString(options.get(3)));
+        if (A != null && B != null && C != null && D != null) {
+            A.setText(Integer.toString(options.get(0)));
+            B.setText(Integer.toString(options.get(1)));
+            C.setText(Integer.toString(options.get(2)));
+            D.setText(Integer.toString(options.get(3)));
+        }
     }
 
     private int randInt(int min, int max) {
