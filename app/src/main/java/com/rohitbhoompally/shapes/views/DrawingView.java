@@ -99,5 +99,11 @@ public class DrawingView extends SquareView {
                 lineSegment.getEndingPoint().x,
                 lineSegment.getEndingPoint().y,
                 paint);
+
+        // Draw starting and ending points for the lines
+        canvas.drawCircle(lineSegment.getStartingPoint().x, lineSegment.getStartingPoint().y,
+                DEFAULT_CIRCLE_RADIUS, circlePaint);
+        canvas.drawCircle(lineSegment.getEndingPoint().x, lineSegment.getEndingPoint().y,
+                DEFAULT_CIRCLE_RADIUS, circlePaint);
     }
 }
